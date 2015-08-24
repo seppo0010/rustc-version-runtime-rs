@@ -23,6 +23,7 @@ rustc_version_runtime = "0.1.0"
 
 ```rust
 extern crate rustc_version_runtime;
+use rustc_version_runtime::version;
 
-println!("This was compiled using {:?}", rustc_version_runtime::version());
+println!("This was compiled using {:?}", version());
 ```

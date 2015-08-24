@@ -1,0 +1,24 @@
+language: rust
+rust:
+- nightly
+- beta
+- stable
+before_script:
+- |
+  pip install 'travis-cargo<0.2' --user &&
+  ln -s /bin/false $HOME/.local/bin/rustc &&
+  ln -s $HOME/rust/bin/rustc $HOME/.local/bin/real_rustc &&
+  export PATH=$HOME/.local/bin:$PATH &&
+  export RUSTC=real_rustc
+script:
+- |
+  travis-cargo build &&
+  travis-cargo test &&
+  travis-cargo bench &&
+  travis-cargo --only stable doc
+after_success:
+- travis-cargo --only stable doc-upload
+env:
+  global:
+  - TRAVIS_CARGO_NIGHTLY_FEATURE=""
+  - secure: nol5h8zDE5xrdKNDHUHCS7Kw6nVQD28oRzsh67KpOWcsxuoEftvqoRLJimDfzykuOF/qnOIvf4x3An4m6riOyqOq7zFjHRZ9lCzcWKPu1/7zlSeFk+TSEFcrQ0aO8Y1pZYxdgcIPTSyVgNOf1va0RfGyRSzg/G54gc1aXfwOwr7BFGYvGzj/2tC7FoWJinfb1xxJV3q6DA79hZjXyxqqi7WcYeMXR86P8Aan6kYcmjqDqbM0dxjq+21YiG+y3RTb3xxnZqu+rMRPiUeyyRbIma0tbqW8oQ5pcrAECSr9hKFDI1prfZzyHzeuv2GXXMkSkTA/KJrWoWAlX15bri36xPl/UKLdkXjTmQ9bhoM6nDa+rSE5afKCUSyTDa7/zFVBLOAYBRHjE1qe029P9UjvugAWgsj4Cet3KvS/Ozj+ILiLyHZFuvu6+1JQcNPwd9wqYGbIKZBnsOn3pB9LYhKiBCxD1YoRiRGyL5ym0x+HwTRE/0lDbVzJxoF4PH3Au40BQsENQOwOAyyA2xgOp+5JakpKZNiJby7vKRsQtK0xCM79Tvbb1IrooUlCYRsU6IFNf8ABEDdD3QcfKlStNaco/Guq/2C5lraCKadaGpDiS09SSa0C3pO6HUiJhhTr0F/Ke3FSWRQLaakNC0Fy0Ha//Z7m6TVl2y2hAoou8qDdV1Q=
