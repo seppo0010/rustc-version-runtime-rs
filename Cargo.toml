@@ -1,0 +1,22 @@
+[package]
+name = "rustc_version_runtime"
+version = "0.1.0"
+authors = ["Sebastian Waisbrot <seppo0010@gmail.com>"]
+license = "MIT"
+
+description = "A library for querying the version of the rustc compiler used in runtime"
+readme = "README.md"
+documentation = "http://seppo0010.github.io/rustc-version-runtime-rs/rustc_version_runtime/index.html"
+
+repository = "https://github.com/seppo0010/rustc-version-runtime-rs"
+keywords = ["version", "rustc"]
+
+build = "build.rs"
+
+[dependencies]
+rustc_version = "0.1.2"
+semver = "0.1"
+
+[build-dependencies]
+rustc_version = "0.1.2"
+semver = "0.1"
