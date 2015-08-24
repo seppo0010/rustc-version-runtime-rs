@@ -17,7 +17,7 @@ fn identifier_to_source(id: &Identifier) -> String {
 fn identifiers_to_source(ids: &Vec<Identifier>) -> String {
     let mut r = "vec![".as_bytes().to_vec();
     for id in ids {
-        write!(r, "{}", identifier_to_source(id)).unwrap();
+        write!(r, "{}, ", identifier_to_source(id)).unwrap();
     }
     write!(r, "]").unwrap();
     String::from_utf8(r).unwrap()
