@@ -15,7 +15,7 @@ Add the following dependency to your Cargo manifest:
 
 ```toml
 [dependencies]
-rustc_version_runtime = "0.1.0"
+rustc_version_runtime = "0.1.*"
 ```
 
 
