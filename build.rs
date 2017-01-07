@@ -33,8 +33,8 @@ fn main() {
     let version = version_meta();
 
     write!(f, "
-            /// Returns the `rustc` SemVer version and additional metadata¬
-            /// like the git short hash and build date.¬
+            /// Returns the `rustc` SemVer version and additional metadata
+            /// like the git short hash and build date.
             pub fn version_meta() -> VersionMeta {{
                 VersionMeta {{
                     semver: Version {{
@@ -44,8 +44,11 @@ fn main() {
                         pre: {pre},
                         build: {build},
                     }},
-                    git_short_hash: \"{hash}\".to_owned(),
-                    date: \"{date}\".to_owned(),
+                    host: \"{host}\".to_owned(),
+                    short_version_string: \"{short_version_string}\".to_owned(),
+                    commit_hash: {commit_hash},
+                    commit_date: {commit_date},
+                    build_date: {build_date},
                     channel: Channel::{channel},
                 }}
             }}
@@ -55,8 +58,11 @@ fn main() {
             patch = version.semver.patch,
             pre = identifiers_to_source(&version.semver.pre),
             build = identifiers_to_source(&version.semver.build),
-            hash = version.git_short_hash,
-            date = version.date,
+            commit_hash = version.commit_hash.map(|h| format!("Some(\"{}\".to_owned())", h)).unwrap_or("None".to_owned()),
+            commit_date = version.commit_date.map(|h| format!("Some(\"{}\".to_owned())", h)).unwrap_or("None".to_owned()),
+            build_date = version.build_date.map(|h| format!("Some(\"{}\".to_owned())", h)).unwrap_or("None".to_owned()),
+            host = version.host,
+            short_version_string = version.short_version_string,
             channel = match version.channel {
                 Channel::Dev => "Dev",
                 Channel::Nightly => "Nightly",
