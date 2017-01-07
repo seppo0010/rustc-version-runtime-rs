@@ -14,9 +14,9 @@ keywords = ["version", "rustc"]
 build = "build.rs"
 
 [dependencies]
-rustc_version = "0.1.2"
+rustc_version = "= 0.1.2"
 semver = "0.1"
 
 [build-dependencies]
-rustc_version = "0.1.2"
+rustc_version = "= 0.1.2"
 semver = "0.1"
