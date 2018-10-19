@@ -9,8 +9,8 @@ use rustc_version::{version_meta, Channel};
 
 fn identifier_to_source(id: &Identifier) -> String {
     match *id {
-        Identifier::Numeric(ref n) => format!("Identifier::Numeric({})", n),
-        Identifier::AlphaNumeric(ref n) => format!("Identifier::AlphaNumeric({:?}.to_owned())", n),
+        Identifier::Numeric(ref n) => format!("semver::Identifier::Numeric({})", n),
+        Identifier::AlphaNumeric(ref n) => format!("semver::Identifier::AlphaNumeric({:?}.to_owned())", n),
     }
 }
 
@@ -28,7 +28,7 @@ fn main() {
 
     write!(f, "
             use rustc_version::{{Channel, VersionMeta}};
-            use semver::Version;
+            use semver;
             ").unwrap();
     let version = version_meta().expect("Failed to read rustc version.");
 
@@ -37,7 +37,7 @@ fn main() {
             /// like the git short hash and build date.
             pub fn version_meta() -> VersionMeta {{
                 VersionMeta {{
-                    semver: Version {{
+                    semver: semver::Version {{
                         major: {major},
                         minor: {minor},
                         patch: {patch},
