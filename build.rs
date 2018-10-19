@@ -28,9 +28,9 @@ fn main() {
 
     write!(f, "
             use rustc_version::{{Channel, VersionMeta}};
-            use semver::{{Identifier, Version}};
+            use semver::Version;
             ").unwrap();
-    let version = version_meta();
+    let version = version_meta().expect("Failed to read rustc version.");
 
     write!(f, "
             /// Returns the `rustc` SemVer version and additional metadata
