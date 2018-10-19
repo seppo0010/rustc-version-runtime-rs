@@ -31,7 +31,13 @@ pub fn version() -> Version {
 /// Check wether the `rustc` version matches the given SemVer
 /// version requirement.
 pub fn version_matches(req: &str) -> bool {
-    VersionReq::parse(req).unwrap().matches(&version())
+    // There is some issue checking requirements for pre-releases
+    // https://github.com/steveklabnik/semver/issues/172
+    // I believe users of this crate would expect 1.31.0-nightly to be greater than 1.30 and
+    // equal to 1.31.0. This might not be the case, but I cannot see why.
+    let mut v = version();
+    v.pre = vec![];
+    VersionReq::parse(req).unwrap().matches(&v)
 }
 
 #[test]
