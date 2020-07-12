@@ -3,6 +3,7 @@ extern crate semver;
 
 use std::fs::File;
 use std::io::Write;
+use std::{env, path};
 
 use semver::Identifier;
 use rustc_version::{version_meta, Channel};
@@ -24,7 +25,9 @@ fn identifiers_to_source(ids: &Vec<Identifier>) -> String {
 }
 
 fn main() {
-    let mut f = File::create("src/version.rs").unwrap();
+    let mut path = path::PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    path.push("version.rs");
+    let mut f = File::create(&path).unwrap();
 
     write!(f, "
             use rustc_version::{{Channel, VersionMeta}};

@@ -20,7 +20,9 @@ extern crate semver;
 
 use semver::{Version, VersionReq};
 
-mod version;
+mod version {
+    include!(concat!(env!("OUT_DIR"), "/version.rs"));
+}
 pub use version::version_meta;
 
 /// Returns the `rustc` SemVer version.
