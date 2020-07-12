@@ -1,6 +1,6 @@
 [package]
 name = "rustc_version_runtime"
-version = "0.1.5"
+version = "0.2.0"
 authors = ["Sebastian Waisbrot <seppo0010@gmail.com>"]
 license = "MIT"
 
