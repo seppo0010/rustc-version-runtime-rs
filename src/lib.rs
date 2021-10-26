@@ -17,10 +17,12 @@
 
 extern crate rustc_version;
 extern crate semver;
+use semver::VersionReq;
+pub use semver::Identifier;
 
-use semver::{Version, VersionReq};
-
+pub use rustc_version::{Version, VersionMeta, Channel};
 mod version {
+    use super::*;
     include!(concat!(env!("OUT_DIR"), "/version.rs"));
 }
 pub use version::version_meta;

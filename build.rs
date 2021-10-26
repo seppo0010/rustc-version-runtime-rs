@@ -29,10 +29,6 @@ fn main() {
     path.push("version.rs");
     let mut f = File::create(&path).unwrap();
 
-    write!(f, "
-            use rustc_version::{{Channel, VersionMeta}};
-            use semver;
-            ").unwrap();
     let version = version_meta().expect("Failed to read rustc version.");
 
     write!(f, "
@@ -40,7 +36,7 @@ fn main() {
             /// like the git short hash and build date.
             pub fn version_meta() -> VersionMeta {{
                 VersionMeta {{
-                    semver: semver::Version {{
+                    semver: Version {{
                         major: {major},
                         minor: {minor},
                         patch: {patch},
