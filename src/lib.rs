@@ -17,10 +17,10 @@
 
 extern crate rustc_version;
 extern crate semver;
-use semver::VersionReq;
-pub use semver::Identifier;
+use rustc_version::LlvmVersion;
+use semver::{BuildMetadata, Prerelease, VersionReq};
 
-pub use rustc_version::{Version, VersionMeta, Channel};
+pub use rustc_version::{Channel, Version, VersionMeta};
 mod version {
     use super::*;
     include!(concat!(env!("OUT_DIR"), "/version.rs"));
@@ -40,7 +40,7 @@ pub fn version_matches(req: &str) -> bool {
     // I believe users of this crate would expect 1.31.0-nightly to be greater than 1.30 and
     // equal to 1.31.0. This might not be the case, but I cannot see why.
     let mut v = version();
-    v.pre = vec![];
+    v.pre = Prerelease::new("").unwrap();
     VersionReq::parse(req).unwrap().matches(&v)
 }
 
