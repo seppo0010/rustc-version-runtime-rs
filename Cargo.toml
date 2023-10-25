@@ -1,6 +1,6 @@
 [package]
 name = "rustc_version_runtime"
-version = "0.2.1"
+version = "0.3.0"
 authors = ["Sebastian Waisbrot <seppo0010@gmail.com>"]
 license = "MIT"
 
@@ -14,9 +14,9 @@ keywords = ["version", "rustc"]
 build = "build.rs"
 
 [dependencies]
-rustc_version = "0.2.3"
-semver = "0.9"
+rustc_version = "0.4.0"
+semver = "1.0"
 
 [build-dependencies]
-rustc_version = "0.2.3"
-semver = "0.9"
+rustc_version = "0.4.0"
+semver = "1.0"
